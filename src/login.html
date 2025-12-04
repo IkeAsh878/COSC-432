@@ -13,6 +13,7 @@
       <p>Online Course Assistant</p>
     </div>
 
+    <!-- This is the basic login form, it has the potential for user sign up/login, but as of now, just redirects user to index.html -->
     <div class="form-container" id="loginForm">
       <h2>Login</h2>
       <form id="loginFormElement">
@@ -25,7 +26,7 @@
           <input type="password" id="loginPassword" required>
         </div>
         <div class="error-message" id="loginError"></div>
-        <button type="submit" class="auth-button">Login</button>
+        <a href="index.html" class="auth-button" style="display: block; text-align: center; text-decoration: none;">Login</a>
       </form>
       <p class="toggle-form">
         Don't have an account? <a href="#" id="showSignup">Sign up</a>
@@ -52,7 +53,7 @@
           <input type="password" id="signupPasswordConfirm" required minlength="6">
         </div>
         <div class="error-message" id="signupError"></div>
-        <button type="submit" class="auth-button">Sign Up</button>
+        <a href="index.html" class="auth-button" style="display: block; text-align: center; text-decoration: none;">Sign Up</a>
       </form>
       <p class="toggle-form">
         Already have an account? <a href="#" id="showLogin">Login</a>
@@ -60,68 +61,25 @@
     </div>
   </div>
 
+  <!--This is for the firebase configuration for futrue implementation
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  
   <script src="../common/firebase-config.js"></script>
   <script src="../common/auth.js"></script>
+  -->
 
   <script>
-    checkAuthState().then(user => {
-      if (user) {
-        window.location.href = 'index.html';
-      }
-    });
-
+    // This allows the switching between the login page and signup page 
     document.getElementById('showSignup').addEventListener('click', (e) => {
       e.preventDefault();
       document.getElementById('loginForm').classList.add('hidden');
       document.getElementById('signupForm').classList.remove('hidden');
-      document.getElementById('loginError').textContent = '';
     });
 
     document.getElementById('showLogin').addEventListener('click', (e) => {
       e.preventDefault();
       document.getElementById('signupForm').classList.add('hidden');
       document.getElementById('loginForm').classList.remove('hidden');
-      document.getElementById('signupError').textContent = '';
-    });
-
-    document.getElementById('loginFormElement').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-      const errorDiv = document.getElementById('loginError');
-
-      const result = await signIn(email, password);
-      
-      if (result.success) {
-        window.location.href = 'index.html';
-      } else {
-        errorDiv.textContent = result.error;
-      }
-    });
-
-    document.getElementById('signupFormElement').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('signupName').value;
-      const email = document.getElementById('signupEmail').value;
-      const password = document.getElementById('signupPassword').value;
-      const passwordConfirm = document.getElementById('signupPasswordConfirm').value;
-      const errorDiv = document.getElementById('signupError');
-
-      if (password !== passwordConfirm) {
-        errorDiv.textContent = 'Passwords do not match';
-        return;
-      }
-
-      const result = await signUp(email, password, name);
-      
-      if (result.success) {
-        window.location.href = 'index.html';
-      } else {
-        errorDiv.textContent = result.error;
-      }
     });
   </script>
 </body>

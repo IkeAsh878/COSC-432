@@ -30,7 +30,9 @@
   </section>
 
   <script>
-    requireAuth();
+    
+    // This is incase of future implementation which will allow user to actually sign up, as of right now, the login button simply directs the user to the index.html since we are viewing in Live Server (it's not actually published):
+    // requireAuth();
 
     const modeButton = document.getElementById("modeButton");
     modeButton.addEventListener("click", function () {
