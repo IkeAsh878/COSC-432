@@ -36,14 +36,40 @@ document.addEventListener("DOMContentLoaded", function () {
     navLinks.appendChild(li);
   });
 
+  const userInfo = document.createElement("div");
+  userInfo.classList.add("navbar-user-info");
+  userInfo.id = "userInfo";
+
   const logo = document.createElement("h1");
   logo.textContent = "OCA"; 
 
   navbar.appendChild(logo);
   navbar.appendChild(logo);
   navbar.appendChild(navLinks);
+  navbar.appendChild(userInfo);
 
   document.body.prepend(navbar);
+
+  if (typeof firebase !== 'undefined' && firebase.auth) {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const userName = document.createElement("span");
+        userName.classList.add("user-name");
+        userName.textContent = user.displayName || user.email;
+
+        const logoutButton = document.createElement("button");
+        logoutButton.classList.add("logout-button");
+        logoutButton.textContent = "Logout";
+        logoutButton.onclick = async () => {
+          await firebase.auth().signOut();
+          window.location.href = 'login.html';
+        };
+
+        userInfo.appendChild(userName);
+        userInfo.appendChild(logoutButton);
+      }
+    });
+  }
 });
 
 //Chat Functions

@@ -8,6 +8,13 @@
   <!--Styles -->
   <link rel="stylesheet" href="../styles/styles.css">
   <link rel="stylesheet" href="../styles/mockOCA.css">
+  
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  
+  <script src="../common/firebase-config.js"></script>
+  <script src="../common/auth.js"></script>
+  
 
   <!--NavBar-->
   <script defer src="../common/navbar.js"></script>
@@ -36,6 +43,10 @@
   </section>
 
   <script>
+    
+    // This is incase of future implementation which will allow user to actually sign up, as of right now, the login button simply directs the user to the index.html since we are viewing in Live Server (it's not actually published):
+    // requireAuth();
+
     // ---- Cached DOM Element ----
     const modeButton = document.getElementById("modeButton");
     modeButton.addEventListener("click", function () {
@@ -51,7 +62,6 @@
       const chatHistory = document.getElementById("chatHistory");
 
       if (userInput.trim() !== "") {
-        // Display user's message
         const userMessage = document.createElement("p");
         userMessage.textContent = userInput;
         userMessage.classList.add("user-msg");
@@ -59,15 +69,12 @@
 
         chatHistory.scrollTop = chatHistory.scrollHeight;
 
-        // Clear input box
-        document.getElementById("userInput").value = "";
+         document.getElementById("userInput").value = "";
 
-        // Determine mode to send
         const currentMode = modeButton.textContent.includes("Tutoring")
           ? "Tutoring"
           : "Conceptual";
 
-        // Send message to Python backend → OpenAI
         fetch("http://127.0.0.1:8000/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -78,7 +85,6 @@
         })
         .then(response => response.json())
         .then(data => {
-          // Display OCA (ChatGPT) response
           const ocaMessage = document.createElement("p");
           ocaMessage.textContent = "OCA: " + data.reply;
           ocaMessage.classList.add("oca-msg");

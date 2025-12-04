@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OCA Login</title>
+  <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>OCA</h1>
+      <p>Online Course Assistant</p>
+    </div>
+
+    <!-- This is the basic login form, it has the potential for user sign up/login, but as of now, just redirects user to index.html -->
+    <div class="form-container" id="loginForm">
+      <h2>Login</h2>
+      <form id="loginFormElement">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required>
+        </div>
+        <div class="error-message" id="loginError"></div>
+        <a href="index.html" class="auth-button" style="display: block; text-align: center; text-decoration: none;">Login</a>
+      </form>
+      <p class="toggle-form">
+        Don't have an account? <a href="#" id="showSignup">Sign up</a>
+      </p>
+    </div>
+
+    <div class="form-container hidden" id="signupForm">
+      <h2>Sign Up</h2>
+      <form id="signupFormElement">
+        <div class="form-group">
+          <label for="signupName">Display Name</label>
+          <input type="text" id="signupName" required>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="signupPasswordConfirm">Confirm Password</label>
+          <input type="password" id="signupPasswordConfirm" required minlength="6">
+        </div>
+        <div class="error-message" id="signupError"></div>
+        <a href="index.html" class="auth-button" style="display: block; text-align: center; text-decoration: none;">Sign Up</a>
+      </form>
+      <p class="toggle-form">
+        Already have an account? <a href="#" id="showLogin">Login</a>
+      </p>
+    </div>
+  </div>
+
+  <!--This is for the firebase configuration for futrue implementation
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="../common/firebase-config.js"></script>
+  <script src="../common/auth.js"></script>
+  -->
+
+  <script>
+    // This allows the switching between the login page and signup page 
+    document.getElementById('showSignup').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('signupForm').classList.remove('hidden');
+    });
+
+    document.getElementById('showLogin').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('signupForm').classList.add('hidden');
+      document.getElementById('loginForm').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>

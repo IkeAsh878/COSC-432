@@ -12,7 +12,9 @@ body {
   background-color: #507c7c;
   color: white;
   padding: 10px 20px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   z-index: 10;
 }
 
@@ -35,6 +37,33 @@ body {
 
 .navbar-link:hover {
   color: #507c7c
+}
+
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #96C4BB;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #BFD6C1;
 }
 
 .mode-switch {
