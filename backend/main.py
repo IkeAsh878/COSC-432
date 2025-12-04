@@ -5,7 +5,6 @@ import os
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
-# import your lecture chunks + retriever
 from lecture_data import retrieve_relevant_chunks
 
 load_dotenv()
@@ -25,72 +24,87 @@ class Message(BaseModel):
     mode: str = "Tutoring"
 
 
+ASSISTANT_ID = "asst_rD5xeEalkthJwUFL2iScqDNx"
+
+# ---------------------------------------------------------
+# ✅ Create ONE persistent thread at app startup
+# ---------------------------------------------------------
+THREAD_ID = client.beta.threads.create().id
+print("Using persistent thread:", THREAD_ID)
+
+
 @app.post("/chat")
 def chat(msg: Message):
     try:
-        # Retrieve relevant chunks from the lecture
+        # Retrieve relevant lecture content
         context_chunks = retrieve_relevant_chunks(msg.message)
         context_text = "\n\n".join(context_chunks)
 
-        # Mode-based system prompts
+        # Build system prompt based on mode
         if msg.mode.lower() == "tutoring":
-            system_prompt = """ 
-                "You are OCA in Tutoring Mode. "
-                "Your role:"
-                "- Act as an out-of-classroom tutoring assistant."
-                "- Ask leading questions to gauge student understanding."
-                "- Provide step-by-step conceptual guidance."
-                "- Use ONLY Lecture 1 course content."
-                "- Keep your knowledge bounded to the course material."
-                "- Direct students to specific parts of the course content when possible."
-                
-                Rules:
-                - If asked assignment/exam questions, reply:
-                “I cannot assist with assignments or exams, but I can explain the underlying concepts.”
-                - If the question is outside the course content, reply:
-                “This topic is outside the scope of the course material I can access.”
-                - Engage conversationally and adapt to the student's level.
-                Tone:
-                - Friendly, patient, and teaching-oriented.
-                -Start every explanation with "Tutoring Mode: "
-                    """
+            system_prompt = f"""
+You are OCA in Tutoring Mode.
+
+Rules:
+- Act as an out-of-classroom tutoring assistant.
+- Ask leading questions.
+- Use ONLY Lecture 1 course material.
+- For assignments/exams → “I cannot assist with assignments or exams…”
+- For out-of-scope → “This topic is outside the scope…”
+Start every explanation with "Tutoring Mode: "
+
+Relevant Lecture Extracts:
+{context_text}
+            """
         else:
-            system_prompt = """
-                You are OCA in Conceptual Mode.
+            system_prompt = f"""
+You are OCA in Conceptual Mode.
 
-                Your role:
-                - Provide concise, summarized conceptual information strictly from Lecture 1.
-                - Act as an interactive teaching assistant.
-                - Retrieve and summarize relevant portions of course content.
-                - DO NOT ask guiding or leading questions.
-                - DO NOT tutor or assess understanding.
+Rules:
+- Summaries only.
+- No leading questions.
+- Use ONLY Lecture 1 content.
+Start every explanation with "Conceptual Mode: "
 
-                Rules:
-                - If asked assignment/exam questions, reply:
-                “I cannot assist with assignments or exams, but I can summarize relevant concepts.”
-                - If outside the course content, reply:
-                “This topic is not part of the course material I can access.”
-                -Start every explanation with "Conceptual Mode: "
-
-                Tone:
-                - Professional, concise, and informational.
+Relevant Lecture Extracts:
+{context_text}
             """
 
-        # Final messages to the model
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {
-                    "role": "system",
-                    "content": "Relevant Lecture Extracts:\n" + context_text
-                },
-                {"role": "user", "content": msg.message}
-            ]
+        # ---------------------------------------------------------
+        # ✅ Append user message to THE SAME THREAD
+        # ---------------------------------------------------------
+        client.beta.threads.messages.create(
+            thread_id=THREAD_ID,
+            role="user",
+            content=system_prompt + "\n\nUser: " + msg.message
         )
 
-        reply = response.choices[0].message.content
-        return {"reply": reply}
+        # ---------------------------------------------------------
+        # ✅ Run the assistant against the SAME thread
+        # ---------------------------------------------------------
+        run = client.beta.threads.runs.create(
+            thread_id=THREAD_ID,
+            assistant_id=ASSISTANT_ID
+        )
+
+        # Wait for completion
+        while True:
+            run_status = client.beta.threads.runs.retrieve(
+                thread_id=THREAD_ID,
+                run_id=run.id
+            )
+            if run_status.status == "completed":
+                break
+
+        # Retrieve messages
+        messages = client.beta.threads.messages.list(thread_id=THREAD_ID)
+
+        # Return latest assistant message
+        for m in messages.data:
+            if m.role == "assistant":
+                return {"reply": m.content[0].text.value}
+
+        return {"reply": "No assistant message found."}
 
     except Exception as e:
         return {"error": str(e)}
