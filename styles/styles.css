@@ -16,6 +16,27 @@ body {
   z-index: 10;
 }
 
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px
+}
+
+.navbar-link{
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.navbar-link:hover {
+  color: #507c7c
+}
+
 .mode-switch {
   text-align: center;
   margin: 20px 0;
