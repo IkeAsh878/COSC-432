@@ -1,9 +1,5 @@
-//NavBar Initialization
-
 document.addEventListener("DOMContentLoaded", () => {
-
   if (document.querySelector(".navbar")) return;
-document.addEventListener("DOMContentLoaded", function () {
 
   const navbar = document.createElement("nav");
   navbar.classList.add("navbar");
@@ -18,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
   navLinks.classList.add("navbar-links");
 
   const links = [
-    {name: "Home", href: "#" },
-    {name: "About", href: "#about" },
-    {name: "Services", href: "#services" },
-    {name: "Contact", href: "#Contact"},
+    {name: "Home", href: "index.html" },
+    {name: "About", href: "#" },
+    {name: "Lectures", href: "lectures.html" },
+    {name: "Sign Out", href: "#"},
   ];
 
   links.forEach(link =>{
@@ -40,10 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
   userInfo.classList.add("navbar-user-info");
   userInfo.id = "userInfo";
 
-  const logo = document.createElement("h1");
-  logo.textContent = "OCA"; 
-
-  navbar.appendChild(logo);
   navbar.appendChild(logo);
   navbar.appendChild(navLinks);
   navbar.appendChild(userInfo);
