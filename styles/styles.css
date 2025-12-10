@@ -37,7 +37,7 @@ body {
 }
 
 .navbar-link:hover {
-  color: #507c7c
+  color: #96C4BB
 }
 
 .navbar-user-info {
@@ -135,4 +135,31 @@ button:hover {
 
 .chat-input button:hover {
   background-color: #507C7C;
+}
+
+.about-page {
+    width: 80%;
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+}
+
+.about-header {
+    color: #507c7c;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.about-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
 }
