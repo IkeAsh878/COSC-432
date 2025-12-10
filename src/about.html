@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/secret.css">
+</head>
+<body>
+
+<script defer src="../common/navbar.js"></script>
+
+<main class="about-page">
+    <h1 class="about-header">About Us</h1>
+
+    <div class="about-container">
+        <p>Welcome to our website! On-Demand Interactive Course Assistant, or "OCA", is an OpenAI based chat system designed to help you understand software requirements, design, and development processes.</p>
+        <p>On our Home page, you can speak directly to OCA in either Tutoring or Conceptual mode. The Lectures page has the notes OCA refers to and is available for you to access.</p>
+        <p>We hope our content helps you grasp key ideas quickly and apply them to your projects!</p>
+
+        <button id="secret-button" class="secret-button">?</button>
+        <div id="secret-circles-container" class="secret-circles-container"></div>
+        <button id="secret-close-button" class="secret-close-button">Close</button>
+    </div>
+</main>
+
+<script>
+const secretBtn = document.getElementById('secret-button');
+const circlesContainer = document.getElementById('secret-circles-container');
+const closeBtn = document.getElementById('secret-close-button');
+
+let konamiIndex = 0;
+const konamiCode = [
+    'ArrowUp','ArrowUp','ArrowDown','ArrowDown',
+    'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight',
+    'b','a'
+];
+
+let gameStarted = false;
+let gameLoopId;
+let jumpHandlerRef;
+let secretWalkerVisible = false;
+
+secretBtn.addEventListener('click', () => {
+    if (gameStarted || circlesContainer.children.length > 0) return;
+    circlesContainer.innerHTML = '';
+    for (let i = 0; i < 10; i++) {
+        const circle = document.createElement('div');
+        circle.classList.add('secret-circle');
+        circlesContainer.appendChild(circle);
+    }
+    closeBtn.style.display = 'block';
+});
+
+document.addEventListener('keydown', (e) => {
+    const circles = circlesContainer.children;
+    if (!circles.length) return;
+
+    if (e.key === konamiCode[konamiIndex]) {
+        if (konamiIndex < circles.length) {
+            const circle = circles[konamiIndex];
+            circle.classList.add('filled'); 
+            circle.classList.add('bounce');
+            setTimeout(() => circle.classList.remove('bounce'), 500);
+        }
+        konamiIndex++;
+
+        if (konamiIndex === konamiCode.length) {
+            showSecretImage();
+            konamiIndex = 0;
+        }
+    } else {
+        for (let circle of circles) {
+            circle.classList.remove('filled');
+            circle.classList.add('shudder');
+        }
+        setTimeout(() => {
+            for (let circle of circles) circle.classList.remove('shudder');
+        }, 500);
+        konamiIndex = 0;
+    }
+});
+
+function showSecretImage() {
+    circlesContainer.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = "../images/secret.png";
+    img.alt = "Secret Doodle";
+    img.classList.add('secret-image');
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', startGame);
+    circlesContainer.appendChild(img);
+    gameStarted = false;
+}
+
+function showSecretWalker() {
+    if (secretWalkerVisible) return;
+    secretWalkerVisible = true;
+
+    const walker = document.createElement('img');
+    walker.id = 'secret-walker';
+    walker.src = "../images/secret.png";
+    walker.alt = "Secret Walker";
+    walker.style.position = 'fixed';
+    walker.style.bottom = '10px';
+    walker.style.left = '-100px';
+    walker.style.width = '80px';
+    walker.style.transition = 'transform 0.2s ease';
+    document.body.appendChild(walker);
+
+    let posX = -100;
+    const centerX = window.innerWidth / 2 - 40;
+    let movingIn = true;
+
+    function hopMove(dx, duration = 500) {
+    const steps = 20;
+    let stepCount = 0;
+    const stepX = dx / steps;
+    const maxHopHeight = 20;
+
+    function step() {
+        if (stepCount < steps) {
+            posX += stepX;
+            const t = stepCount / steps;
+            const yOffset = Math.sin(t * Math.PI) * maxHopHeight;
+
+            let scaleY = t < 0.5 ? 1.05 : 1;
+            walker.style.left = posX + 'px';
+            walker.style.bottom = (10 + yOffset) + 'px';
+            walker.style.transform = `scaleY(${scaleY})`;
+            stepCount++;
+            requestAnimationFrame(step);
+        } else {
+            walker.style.bottom = '10px';
+            walker.style.transform = 'scaleY(0.85)';
+            setTimeout(() => {
+                walker.style.transform = 'scaleY(1)';
+                setTimeout(randomAction, 1500 + Math.random() * 1500);
+            }, 150);
+        }
+    }
+    step();
+}
+
+
+    function randomAction() {
+        const rand = Math.random();
+        if (rand < 0.4) {
+            hopMove(-50);
+        } else if (rand < 0.8) {
+            hopMove(50);
+        } else {
+            const dx = (Math.random() - 0.5) * 40;
+            hopMove(dx);
+        }
+    }
+
+    function stepWalker() {
+        if (movingIn) {
+            if (posX < centerX) {
+                posX += 5;
+                walker.style.left = posX + 'px';
+                requestAnimationFrame(stepWalker);
+            } else {
+                movingIn = false;
+                setTimeout(randomAction, 1000);
+            }
+        }
+    }
+    stepWalker();
+}
+
+closeBtn.addEventListener('click', () => {
+    circlesContainer.innerHTML = '';
+    closeBtn.style.display = 'none';
+    konamiIndex = 0;
+    stopGame();
+});
+
+function startGame() {
+    if (gameStarted) return;
+    gameStarted = true;
+    circlesContainer.innerHTML = '';
+
+    const gameContainer = document.createElement('div');
+    gameContainer.className = 'game-container';
+    const gameHeader = document.createElement('div');
+    gameHeader.className = 'game-header';
+    const gameDisplay = document.createElement('pre');
+    gameDisplay.className = 'game-display';
+    gameContainer.appendChild(gameHeader);
+    gameContainer.appendChild(gameDisplay);
+    circlesContainer.appendChild(gameContainer);
+
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'reset-game-btn';
+    resetBtn.textContent = 'Reset Game';
+    resetBtn.addEventListener('click', startGame);
+    circlesContainer.appendChild(resetBtn);
+
+    const ROWS = 6;
+    const COLS = 30;
+    let playerRow = ROWS - 2;
+    const playerCol = 1;
+    let obstacles = [];
+    let frame = 0;
+    let score = 0;
+    let jumpTimer = 0;
+    const JUMP_DURATION = 6;
+
+    function render() {
+        let grid = Array.from({length: ROWS}, ()=> Array(COLS).fill(' '));
+        obstacles.forEach(obs => {
+            if (obs.col >= 0 && obs.col < COLS) grid[obs.row][obs.col] = '#';
+        });
+
+        const PLAYER_SPRITE = 'ˊᗜˋ';
+        const SPRITE_WIDTH = PLAYER_SPRITE.length;
+        const GROUND_CHAR = '=';
+        grid[ROWS - 1] = Array(COLS).fill(GROUND_CHAR);
+
+        let displayStr = '';
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                if (r === playerRow && c === playerCol) {
+                    displayStr += PLAYER_SPRITE;
+                    c += SPRITE_WIDTH - 1;
+                } else {
+                    displayStr += grid[r][c];
+                }
+            }
+            displayStr += '\n';
+        }
+
+        gameDisplay.textContent = displayStr;
+
+        if (gameStarted) {
+            gameHeader.textContent = `Score: ${score}`;
+        }
+    }
+
+    function gameLoop() {
+        obstacles.forEach(obs => obs.col--);
+        obstacles = obstacles.filter(obs => obs.col >= 0);
+        
+        if (frame % 20 === 0) {
+            const obsRow = ROWS - 2;
+            obstacles.push({row: obsRow, col: COLS - 1});
+        }
+
+        if (jumpTimer > 0) {
+            playerRow = ROWS - 3;
+            jumpTimer--;
+        } else {
+            playerRow = ROWS - 2;
+        }
+
+        if (obstacles.some(obs => obs.row === playerRow && obs.col === playerCol)) {
+            gameHeader.textContent = `Game Over! Final Score: ${score}`;
+            gameStarted = false;
+            render();
+            return;
+        }
+
+        frame++;
+        score = Math.floor(frame / 5);
+
+        if (score >= 30) {
+            showSecretWalker();
+        }
+
+        render();
+        if (gameStarted) gameLoopId = setTimeout(gameLoop, 150);
+    }
+
+    jumpHandlerRef = function(e){
+        if (e.code === 'Space' && jumpTimer === 0) {
+            jumpTimer = JUMP_DURATION;
+        }
+    };
+
+    document.addEventListener('keydown', jumpHandlerRef);
+    render();
+    gameLoop();
+}
+
+function stopGame(){
+    gameStarted = false;
+    clearTimeout(gameLoopId);
+    if (jumpHandlerRef) {
+        document.removeEventListener('keydown', jumpHandlerRef);
+        jumpHandlerRef = null;
+    }
+}
+</script>
+
+</body>
+</html>

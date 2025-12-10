@@ -15,9 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const links = [
     {name: "Home", href: "index.html" },
-    {name: "About", href: "#" },
+    {name: "About", href: "about.html" },
     {name: "Lectures", href: "lectures.html" },
-    {name: "Sign Out", href: "#"},
+    {name: "Sign Out", href: "login.html"},
   ];
 
   links.forEach(link =>{
