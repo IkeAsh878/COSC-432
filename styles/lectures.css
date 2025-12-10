@@ -1,0 +1,36 @@
+.lectures-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+}
+
+.lecture {
+    margin-bottom: 10px;
+    border: 1px solid #507c7c;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.lecture-toggle {
+    width: 100%;
+    padding: 12px 20px;
+    text-align: left;
+    background-color: #507c7c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.lecture-toggle:hover {
+    background-color: #96c4bb;
+}
+
+.lecture-content {
+    display: none;
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+}

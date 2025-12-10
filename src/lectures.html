@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectures</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/lectures.css">
+</head>
+
+<body>
+
+  <script defer src="../common/navbar.js"></script>
+
+  <main class="lectures-container">
+    <h1 style="color: #507c7c;">Lecture Notes</h1>
+
+    <div class="lecture">
+        <button class="lecture-toggle">Lecture 1</button>
+        <div class="lecture-content">
+        <p><strong>What Are Requirements</strong></p>
+
+        <p><strong>What leads to a useful product?</strong></p>
+        <ul>
+        <li>Situations where the developers have understood:
+            <ul>
+            <li>What the product intends to accomplish</li>
+            <li>How it must accomplish this purpose</li>
+            <li>What kind of work the users want to do</li>
+            <li>How the product affects work and fits into the organization’s goals</li>
+            </ul>
+        </li>
+        <li>A product’s requirements are:
+            <ul>
+            <li>What it does for the users</li>
+            <li>Constraints it must satisfy in a particular context</li>
+            </ul>
+        </li>
+        <li>Requirements process:
+            <ul>
+            <li>Exploration of intended product</li>
+            <li>Discovering behavior and functionality</li>
+            <li>Describing outcomes of the above activities</li>
+            </ul>
+        </li>
+        <li>Requirements are:
+            <ul>
+            <li>Independent of development process, programming language, development tools, etc.</li>
+            <li>Expressed as abstractions</li>
+            <li>Technology neutral</li>
+            </ul>
+        </li>
+        </ul>
+
+        <p><strong>Requirements vs. Design</strong></p>
+        <p>Requirement: Statement of business need without implementation bias</p>
+        <p>Design is a plan that:</p>
+        <ul>
+            <li>Translates requirements into physical reality</li>
+            <li>Determination of:
+                <ul>
+                <li>Devices to be used</li>
+                <li>Software components</li>
+                <li>How construction will be done</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Requirements, design, and implementation can be done in an iterative loop</p>
+
+        <p><strong>Requirements Gathering and Systems Modeling</strong></p>
+        <ul>
+            <li>There is a significant overlap</li>
+            <li>User models help find requirements</li>
+            <li>Requirements are used to model functionality and data</li>
+            <li>Both generate artifacts that can be used to understand and specify requirements</li>
+        </ul>
+
+        <p><strong>Evolution of Requirements</strong></p>
+        <ul>
+            <li>Requirements are not invariant and may evolve</li>
+            <li>Users may demand more functionality</li>
+            <li>In an agile process, partial product may have an effect on work practices leading to new requirements</li>
+            <li>Evolution of requirement cannot be controlled, it has to be accepted</li>
+            <li>The requirements process needs to explicitly take this into account</li>
+        </ul>
+
+        <p><strong>Requirements & Agile Development</strong></p>
+        <p>We are uncovering better ways of developing software by doing it and helping others do it. Through this work we have come to value:</p>
+        <ul>
+            <li>Individuals and interactions over processes and tools</li>
+            <li>Working software over comprehensive documentation</li>
+            <li>Customer collaboration over contract negotiation</li>
+            <li>Responding to change over following a plan</li>
+        </ul>
+        <p>That is, while there is value in the items on the right, we value the items on the left more.</p>
+
+        <p><strong>What is a requirement?</strong></p>
+
+        <p><strong>Functional Requirements:</strong></p>
+        <ul>
+            <li>Action that a product must take to be useful to the user</li>
+            <li>Arise from work that stakeholders do</li>
+        </ul>
+        <p><em>Example:</em> The product shall produce an amended de-icing schedule when a change to a truck status means that the previously scheduled work cannot be carried out as planned</p>
+
+        <p><strong>Non-Functional Requirements:</strong></p>
+        <ul>
+        <li>Critical Qualities or properties that a product must have:
+            <ul>
+            <li>Performance</li>
+            <li>Look and feel</li>
+            <li>Usability</li>
+            <li>Security</li>
+            <li>Legal restriction</li>
+            </ul>
+        </li>
+        </ul>
+        <p><em>Example:</em> The product shall determine friend or foe in less than 0.25 seconds</p>
+        <p><em>Example:</em> The product shall be able to be used by travelers in the arrivals hall who do not speak the home language</p>
+
+        <p><strong>Constraints:</strong></p>
+        <ul>
+        <li>Global issues that shape requirements</li>
+        </ul>
+        <p><em>Example:</em> The product shall be available at the beginning of the new tax year</p>
+        </div>
+    </div>
+
+    <div class="lecture">
+        <button class="lecture-toggle">Lecture 2</button>
+        <div class="lecture-content">
+        <p><strong>RE Process</strong></p>
+        <p><strong>What does the RE process represent?</strong></p>
+        <ul>
+            <li>Normative, prescriptive approaches:
+                <ul>
+                <li>Staged sequence of activities and/or task objectives</li>
+                <li>Intermediate outputs</li>
+                <li>Appropriate techniques</li>
+                <li>Challenges and problems for the specific tasks</li>
+                </ul>
+            </li>
+            <li>Non-normative approaches:
+                <ul>
+                <li>Contextual non-deterministic</li>
+                <li>A description of the socio-behavioral processes</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p><strong>Five factors influencing the RE process (Pohl 1994)</strong></p>
+        <ul>
+            <li>Methods and Methodologies</li>
+            <li>Tools</li>
+            <li>Social Aspects</li>
+            <li>Cognitive Skills</li>
+            <li>Economic Constraints</li>
+        </ul>
+
+        <p><strong>Project Blast-off</strong></p>
+        <ul>
+            <li>Ensures feasibility of project</li>
+            <li>Principal stakeholders meet:
+                <ul>
+                <li>Client</li>
+                <li>Main users</li>
+                <li>Lead requirement analyst</li>
+                <li>Technical and business experts</li>
+                </ul>
+            </li>
+            <li>Ensure project has clearly defined scope and worthy objective</li>
+            <li>Other stakeholders are identified</li>
+            <li>Preliminary cost estimate / preliminary risk estimate</li>
+            <li>Go/No go decision</li>
+        </ul>
+
+        <p><strong>Trawling for Knowledge</strong></p>
+        <ul>
+            <li>Work context diagram is partitioned into Business Use cases</li>
+            <li>Different techniques:
+                <ul>
+                <li>Apprenticing</li>
+                <li>Scenarios</li>
+                <li>Use case workshops</li>
+                </ul>
+            </li>
+            <li>Essence of the System vs Perceived solution</li>
+        </ul>
+
+        <p><strong>Prototyping Work</strong></p>
+        <ul>
+            <li>Prototypes:
+                <ul>
+                <li>Simulation of requirements</li>
+                <li>High fidelity vs Low fidelity</li>
+                </ul>
+            </li>
+            <li>Effective when:
+                <ul>
+                <li>Requirements are not being formulated properly</li>
+                <li>Very novel product</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p><strong>Writing Requirements</strong></p>
+        <ul>
+            <li>Essential to avoid misunderstood requirements</li>
+            <li>How to write requirements:
+                <ul>
+                <li>It should be testable</li>
+                <li>Agreed and understood by stakeholder</li>
+                <li>Audience</li>
+                <li>Fit criterion</li>
+                <li>Shell/specification template</li>
+                </ul>
+            </li>
+            <li>Integrated activity</li>
+            <li>Alternative – systems modeling</li>
+            <li>How does this help the analyst</li>
+        </ul>
+
+        <p><strong>Quality Gateway</strong></p>
+        <ul>
+            <li>Test requirements</li>
+            <li>Requirements tested for:
+                <ul>
+                <li>Completeness</li>
+                <li>Relevance</li>
+                <li>Testability</li>
+                <li>Coherency</li>
+                <li>Traceability</li>
+                <li>Understandability</li>
+                </ul>
+            </li>
+            <li>Requirements leakage</li>
+        </ul>
+
+        <p><strong>Reusing Requirements</strong></p>
+        <ul>
+            <li>Products not completely unique</li>
+            <li>Reuse specifications from previous projects</li>
+            <li>Non-functional requirements are standard</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="lecture">
+        <button class="lecture-toggle">Lecture 3</button>
+        <div class="lecture-content">
+            <p><strong>Project Blastoff</strong></p>
+            <ul>
+                <li>Identifies:
+                    <ul>
+                    <li>The work area related to the product</li>
+                    <li>The purpose of the product</li>
+                    </ul>
+                </li>
+                <li>Lays the groundwork to make the RE activity efficient and effective</li>
+            </ul>
+
+            <p><strong>Project Blastoff Deliverables</strong></p>
+            <ul>
+                <li>Purpose of the project:
+                    <ul>
+                    <li>Short quantified statement indicating the product’s intention and associated advantages</li>
+                    <li>Reasons for investment</li>
+                    <li>Business benefits</li>
+                    </ul>
+                </li>
+                <li>Scope of work:
+                    <ul>
+                    <li>Business Area affected</li>
+                    </ul>
+                </li>
+                <li>Stakeholders:
+                    <ul>
+                        <li>Client</li>
+                        <li>Customer</li>
+                        <li>Users</li>
+                        <li>People with related knowledge/influence</li>
+                    </ul>
+                </li>
+                <li>Constraints:
+                    <ul>
+                        <li>Design solution restriction</li>
+                        <li>Budget (Time and Money)</li>
+                    </ul>
+                </li>
+                <li>Names:
+                    <ul>
+                        <li>List of special terminology</li>
+                    </ul>
+                </li>
+                <li>Estimated cost</li>
+                <li>Risks</li>
+                <li>Low fidelity prototype</li>
+            </ul>
+
+            <p><strong>Go/No Go Decision</strong></p>
+            <ul>
+                <li>Is the project viable?</li>
+                <li>Are the benefits worth the cost?</li>
+                <li>Are there enough information to proceed with the requirements activity?</li>
+            </ul>
+
+            <p><strong>Setting the Scope</strong></p>
+            <ul>
+                <li>What is the Scope?
+                    <ul>
+                    <li>Scope of work for which the project is to be used</li>
+                    </ul>
+                </li>
+                <li>Work – Business activity for which the user needs the product</li>
+                <li>Involves processing activity and information</li>
+                <li>Scope is set by separating focal work from that surrounding it</li>
+            </ul>
+
+            <p><strong>Stakeholders</strong></p>
+            <ul>
+                <li>The customer:
+                    <ul>
+                    <li>Buys the product</li>
+                    <li>Could sometimes be the end user</li>
+                    <li>Useful to include information about potential customers</li>
+                    </ul>
+                </li>
+                <li>The Users: get to know them
+                    <ul>
+                    <li>Identify user categories and list their attributes</li>
+                    </ul>
+                </li>
+                <li>Possible attributes:
+                    <ul>
+                    <li>Subject Matter experience</li>
+                    <li>Technological experience</li>
+                    <li>Intellectual abilities</li>
+                    <li>Attitude toward the job</li>
+                    <li>Education</li>
+                    <li>Linguistic Skills</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Goals</strong></p>
+            <ul>
+                <li>Purpose – What should the product do?</li>
+                <li>Advantage – What business advantage does it provide?</li>
+                <li>Measurement – How do you measure such advantage?</li>
+                <li>Additional Attributes:
+                    <ul>
+                        <li>Viable</li>
+                        <li>Feasible</li>
+                        <li>Achievable</li>
+                    </ul>
+                </li>
+                <li>Supporting Material</li>
+            </ul>
+
+            <p><strong>Constraints</strong></p>
+            <ul>
+                <li>Global Requirements:
+                    <ul>
+                        <li>Affect decisions about scope of products</li>
+                        <li>Limitations on budget</li>
+                        <li>Limit solution space</li>
+                    </ul>
+                </li>
+                <li>Solution Constraints:
+                    <ul>
+                        <li>e.g., COTS</li>
+                        <li>Mandated use of existing infrastructure</li>
+                    </ul>
+                </li>
+                <li>Project Constraint:
+                    <ul>
+                        <li>Budget</li>
+                        <li>Time</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Other Blastoff Deliverables</strong></p>
+            <ul>
+                <li>Naming conventions</li>
+                <li>Cost</li>
+                <li>Risk</li>
+            </ul>
+
+            <p><strong>Go/No Go</strong></p>
+            <ul>
+                <li>Are the goals clear and unambiguous?</li>
+                <li>Is it measurable?</li>
+                <li>Is benefits to organization clearly indicated?</li>
+                <li>Is it viable?</li>
+                <li>Is there agreement on work scope?</li>
+                <li>Do some risks have high probability of occurrence?</li>
+                <li>Can such risks make the project infeasible?</li>
+                <li>Is cost reasonable given the benefits?</li>
+                <li>Are there sufficient justifications to invest?</li>
+                <li>Are there strong reasons not to invest?</li>
+                <li>Are there reasons to conduct further investigations?</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="lecture">
+        <button class="lecture-toggle">Lecture 4</button>
+        <div class="lecture-content">
+
+            <p><strong>After Blastoff</strong></p>
+            <ul>
+                <li>Outcomes of the blastoff:
+                    <ul>
+                        <li>Scope of work</li>
+                        <li>Work Context Diagram</li>
+                    </ul>
+                </li>
+                <li>The scope of work too large</li>
+                <li>Mechanisms for breaking it down</li>
+            </ul>
+
+            <p><strong>What does “Work” represent?</strong></p>
+            <ul>
+                <li>More than a computer system(s)</li>
+                <li>A sum total of:
+                    <ul>
+                        <li>Human task</li>
+                        <li>Computers</li>
+                        <li>Machines/Devices</li>
+                        <li>Documents</li>
+                        <li>Etc.</li>
+                    </ul>
+                </li>
+                <li>Description of relevant “business system”</li>
+            </ul>
+
+            <p><strong>Understanding the context of work</strong></p>
+            <ul>
+                <li>What information flow takes place between the work and the outside world?</li>
+                <li>Adjacent systems that make demand or contribute to the world:
+                    <ul>
+                        <li>Automated systems</li>
+                        <li>People</li>
+                        <li>Departments</li>
+                        <li>Organization</li>
+                    </ul>
+                </li>
+                <li>Adjacent systems:
+                    <ul>
+                        <li>Customers for the service/information produced by work</li>
+                        <li>Supply information needed by work</li>
+                    </ul>
+                </li>
+                <li>How do you identify Adjacent Systems?
+                    <ul>
+                        <li>Interfaces within organization</li>
+                        <li>Interfaces outside your organizations</li>
+                    </ul>
+                </li>
+                <li>Work context should include all parts of existing work – human activities and computer systems</li>
+            </ul>
+
+            <p><strong>Business Events</strong></p>
+            <ul>
+            <li>Business event:
+                    <ul>
+                        <li>Takes place outside the scope of work</li>
+                        <li>Signal to work happens through information inflow</li>
+                        <li>Work responds to this information flow in some manner</li>
+                    </ul>
+                </li>
+                <li>Business events initiate a response through business use cases</li>
+                <li>Time triggered business events:
+                    <ul>
+                        <li>Occurs when a pre-arranged time is reached</li>
+                        <li>This could be based on:
+                            <ul>
+                            <li>Periodic</li>
+                            <li>Time Intervals</li>
+                            <li>Time elapsing since a certain business day</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Response characterized by outflow of information</li>
+            </ul>
+
+            <p><strong>Business Events and Business Cases</strong></p>
+            <ul>
+                <li>Allows for a partitioning of work in a non-subjective way through an identification of external stimuli</li>
+                <li>Helps create cohesive partitioning with minimal interfaces between the pieces (less dependencies):
+                    <ul>
+                        <li>Subsequent independent analysis can be carried out</li>
+                    </ul>
+                </li>
+                <li>Allows for a direction of investigation of what happens at the time of a business event</li>
+            </ul>
+
+            <p><strong>More on Business Use Cases</strong></p>
+            <ul>
+                <li>Pre-planned response to a Business Event</li>
+                <li>Collection of:
+                    <ul>
+                        <li>Identifiable processes</li>
+                        <li>Data (stored and/or retrieved)</li>
+                        <li>Outputs</li>
+                        <li>Messages</li>
+                    </ul>
+                </li>
+                <li>Unit of functionality (basis for functional requirements)</li>
+                <li>Business cases can be isolated:
+                    <ul>
+                        <li>Stakeholders with expertise in that part of work can be identified</li>
+                    </ul>
+                </li>
+                <li>Business Cases are observable</li>
+                <li>Processing for business cases are continuous</li>
+            </ul>
+
+            <p><strong>Breaking Down Work</strong></p>
+            <ul>
+                <li>Characteristics of Business Use Cases that make them suitable for the partitioning:
+                    <ul>
+                        <li>Natural partitions – make obvious and natural contribution to work</li>
+                        <li>Minimal Connectivity with other parts of the work</li>
+                        <li>Clearly defined scope</li>
+                        <li>Rules for defining scope</li>
+                        <li>Observable and definable boundaries</li>
+                        <li>Recognizable nomenclature</li>
+                        <li>Determinable existence</li>
+                        <li>One or more expert stakeholders available</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p><strong>Identifying Business Events</strong></p>
+            <ul>
+                <li>Information Flows in a context diagram</li>
+                <li>Each information flow is the result of a business event and/or the resultant business use case</li>
+            </ul>
+
+            <p><strong>Product Use Cases</strong></p>
+            <ul>
+                <li>Determined once the correct work of the business use case has been determined</li>
+                <li>It is a part of the business use case, specifically determining the role the product plays in the work’s response</li>
+                <li>In other words – part of the response is handled by the proposed automated system</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="lecture">
+      <button class="lecture-toggle">Lecture 5</button>
+      <div class="lecture-content">
+        <p>Lecture TBD</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle">Lecture 6</button>
+      <div class="lecture-content">
+        <p>Lecture TBD</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle">Lecture 7</button>
+      <div class="lecture-content">
+        <p>Lecture TBD</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle">Lecture 8</button>
+      <div class="lecture-content">
+        <p>Lecture TBD</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle">Lecture 9</button>
+      <div class="lecture-content">
+        <p>Lecture TBD</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle">Lecture 10</button>
+      <div class="lecture-content">
+        <p>Lecture TBD</p>
+      </div>
+    </div>
+
+    <div class="lecture">
+      <button class="lecture-toggle">Lecture 11</button>
+      <div class="lecture-content">
+        <p>Lecture TBD</p>
+      </div>
+    </div>
+
+  </main>
+
+    <script>
+        const toggles = document.querySelectorAll(".lecture-toggle");
+
+        toggles.forEach(toggle => {
+            toggle.addEventListener("click", () => {
+                const content = toggle.nextElementSibling;
+                content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
+
+</body>
+</html>
